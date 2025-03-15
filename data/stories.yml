@@ -1,0 +1,18 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: action_hello_world
+
+- story: suggest gerne movie
+  steps:
+  - intent: greet
+  - action: action_hello_world
+  - intent: suggest_movie
+  - action: action_suggest_movie
+  - intent: suggest_movie_genre
+  - action: action_suggest_movie_genre
+

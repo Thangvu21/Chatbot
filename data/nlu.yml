@@ -1,0 +1,324 @@
+- version: "3.1"
+
+# intent
+- intent: greet
+  examples: |
+    - chào
+    - xin chào
+    - hello
+    - hi
+    
+
+- intent: goodbye
+  examples: |
+    - tạm biệt
+    - bye
+    - chào tạm biệt
+    - hẹn gặp lại
+    - gặp lại sau nhé
+    - chúc một ngày tốt lành
+    - chúc ngủ ngon
+    - chào nhé
+    - hẹn gặp lại lần sau
+    - tạm biệt bạn
+
+- intent: affirm
+  examples: |
+    - vâng
+    - dạ
+    - đúng rồi
+    - chính xác
+    - tất nhiên
+    - đồng ý
+    - được
+    - ok
+    - chuẩn luôn
+    - nghe hay đấy
+
+- intent: deny
+  examples: |
+    - không
+    - không đâu
+    - không thích
+    - không phải
+    - tôi không nghĩ vậy
+    - không đời nào
+    - không đồng ý
+    - không thích điều đó
+
+# ask movie information
+- intent: ask_movie_genre
+  examples: |
+    - Phim [Avatar](movie) thuộc thể loại gì?
+    - [Inception](movie) là phim thể loại nào?
+    - Thể loại của phim [Titanic](movie) là gì?
+    - Bộ phim [The Matrix](movie) có phải phim [Khoa học viễn tưởng](genre) không?
+    - [Joker](movie) là phim hành động hay tâm lý?
+
+- intent: ask_movie_director
+  examples: |
+    - Ai là đạo diễn của phim [Interstellar](movie)?
+    - Phim [The Dark Knight](movie) do ai làm đạo diễn?
+    - Đạo diễn của [Parasite](movie) là ai?
+    - Ai làm phim [Dune](movie)?
+    - Đạo diễn phim [Tenet](movie) có phải là Christopher Nolan không?
+
+- intent: ask_movie_actor
+  examples: |
+    - Ai đóng chính trong phim [Joker](movie)?
+    - Danh sách diễn viên của phim [The Matrix](movie) là gì?
+    - Phim [Avengers: Endgame](movie) có những diễn viên nào?
+    - Diễn viên nào đóng vai chính trong [Titanic](movie)?
+    - [Leonardo DiCaprio](actor) có đóng trong phim [Inception](movie) không?
+
+- intent: ask_movie_language
+  examples: |
+    - Phim [Parasite](movie) có ngôn ngữ gì?
+    - Phim [Tenet](movie) nói tiếng gì?
+    - [The Lion King](movie) có lồng tiếng Việt không?
+    - Tôi muốn xem [Dune](movie) bằng tiếng Anh, có không?
+    - Phim [Frozen](movie) có bản lồng tiếng Nhật không?
+
+- intent: ask_movie_length
+  examples: |
+    - Phim [Dune](movie) dài bao nhiêu phút?
+    - Thời lượng của [The Godfather](movie) là bao lâu?
+    - Xem [The Irishman](movie) mất bao lâu?
+    - Phim [Tenet](movie) có dài hơn 2 tiếng không?
+    - Tôi muốn biết thời lượng của phim [Interstellar](movie)
+
+- intent: ask_movie_plot
+  examples: |
+    - Phim [Inception](movie) nói về gì?
+    - Cốt truyện của phim [Shutter Island](movie) như thế nào?
+    - Bạn có thể tóm tắt phim [The Prestige](movie) không?
+    - Phim [Interstellar](movie) kể về điều gì?
+    - Nội dung chính của phim [Joker](movie) là gì?
+
+# suggest movie
+# Gợi ý phim
+- intent: suggest_movie
+  examples: |
+    - Bạn có thể gợi ý phim nào hay không?
+    - Có bộ phim nào đáng xem không?
+    - Tôi muốn xem một bộ phim hay.
+    - Hôm nay có phim gì hay không?
+
+# Intent gợi ý theo thể loại
+- intent: suggest_movie_by_genre
+  examples: |
+    - Tôi muốn xem phim [hành động](genre)
+    - Có phim [hài hước](genre) nào hay không?
+    - Bạn có thể gợi ý một bộ phim [kinh dị](genre) không?
+
+# Intent gợi ý theo diễn viên
+- intent: suggest_movie_by_actor
+  examples: |
+    - Có phim nào của [Leonardo DiCaprio](actor) không?
+    - Tôi muốn xem phim mà [Emma Watson](actor) đóng.
+    - Bạn có thể gợi ý phim có [Tom Hardy](actor) không?
+
+# Intent gợi ý theo đạo diễn
+- intent: suggest_movie_by_director
+  examples: |
+    - Có phim nào do [Christopher Nolan](director) đạo diễn không?
+    - Mình thích phim của [Quentin Tarantino](director), có gợi ý nào không?
+    - Bạn có thể giới thiệu một bộ phim của [Denis Villeneuve](director) không?
+
+# Intent gợi ý theo cảm xúc
+- intent: suggest_movie_by_mood
+  examples: |
+    - Mình muốn xem một bộ phim cảm động.
+    - Tôi đang buồn, có phim nào phù hợp không?
+    - Có bộ phim nào vui nhộn để giải trí không?
+
+# Intent gợi ý theo thời gian
+- intent: suggest_movie_by_year
+  examples: |
+    - Có bộ phim nào mới ra mắt không?
+    - Bạn có thể gợi ý phim hay năm nay không?
+    - Mình muốn xem một bộ phim kinh điển.
+
+
+# lookup
+- lookup: genre
+  examples: |
+    - Hành động
+    - Kinh dị
+    - Hài
+    - Tình cảm
+    - Khoa học viễn tưởng
+    - Hoạt hình
+    - Phiêu lưu
+    - Tâm lý
+    - Hình sự
+    - Âm nhạc
+    - Thể thao
+    - Chiến tranh
+    - Viễn Tây
+    - Lãng mạn
+    - Gia đình
+    - Thần thoại
+    - Cổ trang
+    - Kịch tính
+    - Giả tưởng
+    - Trinh thám
+
+
+
+# synonym
+# Movie entity
+- synonym: movie
+  examples: |
+    - phim
+    - bộ phim
+    - tác phẩm
+    - điện ảnh
+    - phim ảnh
+    - phim chiếu rạp
+
+- synonym: genre
+  examples: |
+    - thể loại
+    - dòng phim
+    - phong cách
+    - loại phim
+    - thể loại phim
+    - dòng phim
+    - phong cách phim
+    - loại phim
+
+- synonym: director
+  examples: |
+    - đạo diễn
+    - nhà làm phim
+    - chỉ đạo nghệ thuật
+    - người chỉ đạo
+    - người làm phim
+    - người đạo diễn
+    - đạo diễn phim
+
+- synonym: actor
+  examples: |
+    - diễn viên
+    - nghệ sĩ
+    - ngôi sao
+    - tài tử
+    - tài năng
+    - người nổi tiếng
+
+- synonym: language
+  examples: |
+    - ngôn ngữ
+    - tiếng
+    - ngôn ngữ phim
+    - ngôn ngữ gốc
+    - ngôn ngữ phụ đề
+
+- synonym: length
+  examples: |
+    - thời lượng
+    - thời gian chiếu
+    - độ dài phim
+    - thời lượng phim
+    - thời gian phim
+    - thời gian chiếu phim
+
+- synonym: plot
+  examples: |
+    - nội dung
+    - cốt truyện
+    - câu chuyện
+    - diễn biến
+    - tình tiết
+    - sự kiện
+
+# Ticket entity
+- synonym: ticket
+  examples: |
+    - vé
+    - vé xem phim
+    - phiếu vào cửa
+    - thẻ vào rạp
+    - vé xem
+    - vé chiếu
+    - vé phim
+
+- synonym: date
+  examples: |
+    - ngày
+    - hôm
+    - ngày chiếu
+    - ngày xem
+    - ngày chiếu phim
+    - ngày xem phim
+
+- synonym: time
+  examples: |
+    - giờ
+    - lịch chiếu
+    - thời gian
+    - giờ chiếu
+    - giờ xem
+    - giờ chiếu phim
+
+- synonym: seat
+  examples: |
+    - ghế
+    - chỗ ngồi
+    - vị trí
+    - số ghế
+
+- synonym: price
+  examples: |
+    - giá
+    - phí
+    - tiền vé
+    - chi phí
+
+- synonym: location
+  examples: |
+    - địa điểm
+    - nơi
+    - chỗ
+    - vị trí
+
+- synonym: cinema
+  examples: |
+    - rạp
+    - rạp phim
+    - cụm rạp
+    - trung tâm chiếu phim
+
+# User entity
+- synonym: name
+  examples: |
+    - tên
+    - danh xưng
+    - họ tên
+
+- synonym: phone
+  examples: |
+    - số điện thoại
+    - liên hệ
+    - số máy
+
+- synonym: email
+  examples: |
+    - thư điện tử
+    - địa chỉ email
+    - mail
+
+- synonym: address
+  examples: |
+    - địa chỉ
+    - nơi ở
+    - vị trí rạp
+
+- synonym: age
+  examples: |
+    - tuổi
+    - năm sinh
+    - độ tuổi
+    - số tuổi
+    - tuổi tác

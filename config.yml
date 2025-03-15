@@ -1,0 +1,33 @@
+language: "vi"
+
+pipeline:
+- name: HFTransformersNLP
+  model_name: "vinai/phobert-base"
+  model_weights: "vinai/phobert-base"
+  cache_dir: null
+- name: LanguageModelFeaturizer
+  model_name: "vinai/phobert-base"
+  model_weights: "vinai/phobert-base"
+- name: DIETClassifier
+  epochs: 200    # Tăng epoch để train tốt hơn
+  learning_rate: 0.03    # Giảm learning rate để tối ưu dần
+  constrain_similarities: true
+- name: EntitySynonymMapper
+- name: ResponseSelector
+  epochs: 150    # Tăng epoch để nhận diện tốt hơn
+- name: FallbackClassifier
+  threshold: 0.25    # Giảm threshold để tránh sai sót
+assistant_id: 20250315-172200-aquamarine-rasp
+policies:
+# # No configuration for policies was provided. The following default policies were used to train your model.
+# # If you'd like to customize them, uncomment and adjust the policies.
+# # See https://rasa.com/docs/rasa/policies for more information.
+  - name: MemoizationPolicy
+  - name: RulePolicy
+  - name: UnexpecTEDIntentPolicy
+    max_history: 5
+    epochs: 100
+  - name: TEDPolicy
+    max_history: 5
+    epochs: 100
+    constrain_similarities: true

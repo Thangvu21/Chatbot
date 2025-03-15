@@ -1,0 +1,60 @@
+version: "3.1"
+
+entities:
+# movie entitty
+  - movie
+  - genre
+  - director
+  - actor
+  - language
+  - length
+  - plot
+# ticket entity
+  - ticket
+  - date
+  - time
+  - seat
+  - price
+  - location
+  - cinema
+# user entity
+  - name
+  - phone
+  - email
+  - address
+  - age
+
+intents:
+  # chung
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  # ask movie information
+  - ask_movie_genre
+  - ask_movie_director
+  - ask_movie_actor
+  - ask_movie_language
+  - ask_movie_length
+  - ask_movie_plot
+  # user give information
+  # suggest movie
+  - suggest_movie
+  - suggest_movie_genre
+  - suggest_movie_director
+  - suggest_movie_actor
+  - suggest_movie_language
+  - suggest_movie_length
+  - suggest_movie_plot
+
+actions:
+  - action_hello_world
+  - action_suggest_movie
+  - action_suggest_movie_genre
+# responses:
+  
+  
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
