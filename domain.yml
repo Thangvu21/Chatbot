@@ -30,6 +30,7 @@ intents:
   - goodbye
   - affirm
   - deny
+  - thanks
   # ask movie information
   - ask_movie_genre
   - ask_movie_director
@@ -37,23 +38,74 @@ intents:
   - ask_movie_language
   - ask_movie_length
   - ask_movie_plot
+  # ask 
+  - ask_now_showing_movies
+  - ask_movie_schedule
+  - ask_movie_multiple_info
   # user give information
   # suggest movie
   - suggest_movie
   - suggest_movie_genre
   - suggest_movie_director
   - suggest_movie_actor
-  - suggest_movie_language
-  - suggest_movie_length
-  - suggest_movie_plot
-
+  - suggest_movie_mood
+  - suggest_movie_year
+  - suggest_multiple_description
+  # confirm
+  - ask_confirmed_movie
+  
 actions:
   - action_hello_world
+  - action_thanks
+  - action_affirm
   - action_suggest_movie
   - action_suggest_movie_genre
 # responses:
   
   
+slots:
+  movie:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: movie
+  genre:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: genre
+  director:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: director
+  actor:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: actor
+  language:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: language
+  length:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: length
+  plot:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: plot
 
 session_config:
   session_expiration_time: 60

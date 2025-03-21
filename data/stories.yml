@@ -16,3 +16,10 @@ stories:
   - intent: suggest_movie_genre
   - action: action_suggest_movie_genre
 
+- story: ask movie genre
+  steps:
+  - intent: ask_movie_genre
+  - action: action_suggest_movie_genre
+
+
+

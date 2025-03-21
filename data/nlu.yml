@@ -1,5 +1,6 @@
-- version: "3.1"
+version: "3.1"
 
+nlu:
 # intent
 - intent: greet
   examples: |
@@ -7,7 +8,6 @@
     - xin chào
     - hello
     - hi
-    
 
 - intent: goodbye
   examples: |
@@ -46,7 +46,16 @@
     - không đồng ý
     - không thích điều đó
 
-# ask movie information
+- intent: thanks
+  examples: |
+    - Cảm ơn nhé!  
+    - Cảm ơn, bạn giúp mình nhiều quá!  
+    - Cảm ơn, mình tìm được phim rồi!  
+    - Thanks!  
+    - Cảm ơn bot nha!  
+    - Bạn hữu ích quá, cảm ơn nhiều!  
+
+# ask movie information: hỏi thẳng thông tin phim: từ tên phim -> lấy ra thông tin tương ứng từ tên phim
 - intent: ask_movie_genre
   examples: |
     - Phim [Avatar](movie) thuộc thể loại gì?
@@ -95,50 +104,153 @@
     - Phim [Interstellar](movie) kể về điều gì?
     - Nội dung chính của phim [Joker](movie) là gì?
 
+# Hỏi phim mới ra rạp: Lấy ra danh sách gần đây nhất
+- intent: ask_now_showing_movies
+  examples: |
+    - Hiện tại có phim nào mới chiếu rạp không?  
+    - Bạn có thể cho mình danh sách các phim đang chiếu không?  
+    - Có phim [genre]{"entity": "genre"} nào mới ra rạp không?  
+    - Ở [cinema]{"entity": "cinema"} có phim nào đang chiếu vậy?  
+# Hỏi về lịch chiếu phim cụ thể: : Lấy ra lịch chiếu, địa điểm cụ thể của phim từ tên phim
+- intent: ask_movie_schedule
+  examples: |
+    - Phim [movie]{"entity": "movie"} có suất chiếu nào vào [date]{"entity": "date"} không?  
+    - Ở [cinema]{"entity": "cinema"} có lịch chiếu phim gì hôm nay?  
+    - *[movie]{"entity": "movie"}* có chiếu ở [cinema]{"entity": "cinema"} không?  
+    - Bạn có thể cho mình biết lịch chiếu của *[movie]{"entity": "movie"}* vào [date]{"entity": "date"} không?  
+    - Ở [location]{"entity": "location"} có rạp nào chiếu phim [movie]{"entity": "movie"} không?  
+    - Phim *[movie]{"entity": "movie"}* có chiếu vào [date]{"entity": "date"} không?
+# ask multiple information
+# Hỏi phim theo nhiều tiêu chí: từ nhiều thông tin -> phim: trả về toàn bộ thông tin của phim luôn
+- intent: ask_movie_multiple_info
+  examples: |
+    - Có bộ phim [genre]{"entity": "genre"} nào của đạo diễn [director]{"entity": "director"} không?  
+    - Mình muốn tìm một phim [genre]{"entity": "genre"} có [actor]{"entity": "actor"} đóng và dài khoảng [length]{"entity": "length"} phút  
+    - Bạn có phim nào thuộc thể loại [genre]{"entity": "genre"}, do [director]{"entity": "director"} làm đạo diễn không?  
+    - Có bộ phim nào mà [actor]{"entity": "actor"} đóng, nói bằng [language]{"entity": "language"} không?  
+    - Phim nào có [actor]{"entity": "actor"}, thuộc thể loại [genre]{"entity": "genre"} và dài hơn [length]{"entity": "length"} phút?  
+    - Bạn có thể giới thiệu một bộ phim do [director]{"entity": "director"} làm đạo diễn, thuộc thể loại [genre]{"entity": "genre"} và có thời lượng khoảng [length]{"entity": "length"} không?  
+    - Phim nào có nội dung về [plot]{"entity": "plot"}, thuộc thể loại [genre]{"entity": "genre"} và có [actor]{"entity": "actor"} tham gia?  
+    - Có bộ phim nào của đạo diễn [director]{"entity": "director"}, nội dung về [plot]{"entity": "plot"} và dài khoảng [length]{"entity": "length"} phút không?  
+    - Bạn có thể giới thiệu một phim nói về [plot]{"entity": "plot"}, được sản xuất bằng [language]{"entity": "language"} và dài hơn [length]{"entity": "length"} phút không?  
+    - Phim *[movie]{"entity": "movie"}* thuộc thể loại gì, ai làm đạo diễn và có diễn viên nào đóng?  
+    - Bạn có thể cho mình biết phim *[movie]{"entity": "movie"}* có thời lượng bao nhiêu, nói bằng ngôn ngữ gì và nội dung chính là gì không?  
+    - Mình muốn biết phim *[movie]{"entity": "movie"}* thuộc thể loại [genre]{"entity": "genre"}, có [actor]{"entity": "actor"} đóng và được đạo diễn bởi [director]{"entity": "director"} đúng không?  
+    - Phim *[movie]{"entity": "movie"}* có thời lượng bao nhiêu phút, được nói bằng ngôn ngữ gì và có nội dung thế nào?  
+
+
+
 # suggest movie
-# Gợi ý phim
+# Tìm theo mô tả : suggest multiple entities and pilot: đưa ra 1 list đầy đủ
+- intent: suggest_multiple_description
+  examples: |
+    - Có một bộ phim [genre]{"entity": "genre"} mà mình không nhớ tên, bạn giúp mình tìm được không?  
+    - Mình nhớ nội dung phim nhưng không nhớ tên, bạn có thể giúp mình đoán được không?  
+    - Có một phim về [plot]{"entity": "plot"}, bạn biết là phim gì không?  
+    - Mình muốn tìm một phim có [actor]{"entity": "actor"} đóng, bạn giúp mình được không?  
+    - Có bộ phim nào của đạo diễn [director]{"entity": "director"} không?  
+    - Mình chỉ nhớ phim có [actor]{"entity": "actor"} tham gia, không biết bạn có thể tìm giúp không?  
+    - Mình xem một bộ phim lâu rồi, nhớ có cảnh [plot]{"entity": "plot"}, bạn có thể đoán ra tên phim không?  
+    - Bạn có thể gợi ý một bộ phim nào có chủ đề về [plot]{"entity": "plot"} không?  
+    - Có phim nào mà nhân vật chính do [actor]{"entity": "actor"} đóng không?  
+    - Bạn biết phim nào có cốt truyện giống như [plot]{"entity": "plot"} không?  
+    - Mình đang tìm một bộ phim thuộc thể loại [genre]{"entity": "genre"} nhưng không nhớ rõ nội dung lắm  
+    - Mình nhớ phim có cảnh [plot]{"entity": "plot"}, nhưng không biết tên, bạn giúp được không?  
+    - Có phim nào của [director]{"entity": "director"} mà có diễn viên [actor]{"entity": "actor"} không?  
+    - Mình đang tìm một phim có nhân vật chính nói bằng [language]{"entity": "language"}, bạn giúp mình với?  
+    - Bạn có thể tìm giúp một bộ phim có độ dài khoảng [length]{"entity": "length"} phút không?  
+    - Có phim nào giống với nội dung [plot]{"entity": "plot"} mà bạn biết không?  
+    - Mình nhớ phim có đoạn [plot]{"entity": "plot"}, hình như thuộc thể loại [genre]{"entity": "genre"}, bạn biết tên phim không?  
+    - Bạn có thể tìm giúp một bộ phim có kết thúc liên quan đến [plot]{"entity": "plot"} không?  
+
+# Gợi ý phim: đưa ra câu trả lời top trending hoặc được yêu thích nhất
 - intent: suggest_movie
   examples: |
     - Bạn có thể gợi ý phim nào hay không?
     - Có bộ phim nào đáng xem không?
     - Tôi muốn xem một bộ phim hay.
     - Hôm nay có phim gì hay không?
+    - Top 10 phim hot nhất hiện nay?
+    - Bạn có thể giới thiệu phim nào đang hot không?
+    - Có phim nào được đánh giá cao gần đây không?
 
-# Intent gợi ý theo thể loại
-- intent: suggest_movie_by_genre
+# Intent gợi ý theo thể loại: đưa ra câu trả lời lấy list phim theo thể loại
+- intent: suggest_movie_genre
   examples: |
-    - Tôi muốn xem phim [hành động](genre)
-    - Có phim [hài hước](genre) nào hay không?
-    - Bạn có thể gợi ý một bộ phim [kinh dị](genre) không?
+    - Mình muốn xem một bộ phim thể loại [Hành động](genre).
+    - Có bộ phim [Kinh dị](genre) nào đáng sợ không?
+    - Bạn có gợi ý phim [Hài](genre) nào vui nhộn không?
+    - Mình muốn xem phim [Tình cảm](genre), có gợi ý nào không?  
+    - Mình đang tìm một bộ phim [Khoa học viễn tưởng](genre), có gợi ý nào không?  
+    - Có phim [Hoạt hình](genre) nào hay không?  
+    - Mình muốn xem phim [Phiêu lưu](genre) hấp dẫn, bạn có đề xuất không?  
+    - Bạn có phim [Tâm lý](genre) nào đáng xem không?  
+    - Mình đang muốn xem phim [Hình sự](genre), có bộ nào hay không?  
+    - Có phim [Âm nhạc](genre) nào thú vị không?  
+    - Mình muốn tìm phim [Thể thao](genre), bạn có gợi ý gì không?  
+    - Có bộ phim [Chiến tranh](genre) nào tái hiện lịch sử hay không?  
+    - Bạn có phim [Viễn Tây](genre) nào nổi bật không?  
+    - Mình muốn xem một bộ phim [Lãng mạn](genre), có gợi ý nào không?  
+    - Có bộ phim [Gia đình](genre) nào phù hợp để xem cùng người thân không?  
+    - Mình thích thể loại [Thần thoại](genre), có phim nào hấp dẫn không?  
+    - Bạn có phim [Cổ trang](genre) nào hay không?  
+    - Mình muốn xem một bộ phim [Kịch tính](genre), có bộ nào hấp dẫn không?  
+    - Có bộ phim [Giả tưởng](genre) nào đáng xem không?  
+    - Bạn có thể gợi ý một bộ phim [Trinh thám](genre) gay cấn không?   
 
-# Intent gợi ý theo diễn viên
-- intent: suggest_movie_by_actor
+# Intent gợi ý theo diễn viên: : đưa ra câu trả lời lấy list phim theo tên diễn viên
+- intent: suggest_movie_actor
   examples: |
     - Có phim nào của [Leonardo DiCaprio](actor) không?
     - Tôi muốn xem phim mà [Emma Watson](actor) đóng.
     - Bạn có thể gợi ý phim có [Tom Hardy](actor) không?
 
-# Intent gợi ý theo đạo diễn
-- intent: suggest_movie_by_director
+# Intent gợi ý theo đạo diễn  : đưa ra câu trả lời lấy list phim theo tên đạo diễn
+- intent: suggest_movie_director
   examples: |
     - Có phim nào do [Christopher Nolan](director) đạo diễn không?
     - Mình thích phim của [Quentin Tarantino](director), có gợi ý nào không?
     - Bạn có thể giới thiệu một bộ phim của [Denis Villeneuve](director) không?
 
-# Intent gợi ý theo cảm xúc
-- intent: suggest_movie_by_mood
+# Intent gợi ý theo cảm xúc : đưa ra câu trả lời theo
+# "Cảm động" → Tình cảm, Tâm lý, Gia đình
+# "Buồn" → Tình cảm, Drama, Âm nhạc
+# "Vui nhộn" → Hài, Hoạt hình, Phiêu lưu
+# "Truyền cảm hứng" → Thể thao, Âm nhạc, Khoa học viễn tưởng
+# "Nhẹ nhàng, dễ thương" → Gia đình, Hoạt hình, Lãng mạn
+# "Hợp khi trời mưa" → Kinh dị, Trinh thám, Tâm lý
+# Hoặc là dùng LLM để đưa ra gợi ý phim bên ngoài nhưng không đặt được vé
+- intent: suggest_movie_mood
   examples: |
     - Mình muốn xem một bộ phim cảm động.
     - Tôi đang buồn, có phim nào phù hợp không?
     - Có bộ phim nào vui nhộn để giải trí không?
+    - Mình hơi buồn, không biết nên xem phim gì  
+    - Bạn có thể gợi ý cho mình một bộ phim hay để xem khi đang mệt mỏi không?  
+    - Mình cần một bộ phim truyền cảm hứng, bạn có gợi ý nào không?  
+    - Có phim nào nhẹ nhàng, dễ thương để thư giãn không?  
+    - Mình muốn xem phim hài, có phim nào vui nhộn không?  
+    - Hôm nay trời mưa, có phim nào hợp để xem không?  
 
 # Intent gợi ý theo thời gian
-- intent: suggest_movie_by_year
+- intent: suggest_movie_year
   examples: |
     - Có bộ phim nào mới ra mắt không?
     - Bạn có thể gợi ý phim hay năm nay không?
-    - Mình muốn xem một bộ phim kinh điển.
+    - Những phim đáng xem của năm 2022 là gì?
+    - Có phim nào nổi bật trong năm 2021 không?
+    - Danh sách phim hot nhất 2023?
+# Intent hỏi lại, xác nhận lại thông tin bên trên
+- intent: ask_confirmed_movie
+  examples: |
+    - Bộ phim tôi đã chọn là gì nhỉ?
+    - Phim tôi đã confirm lúc nãy là gì?
+    - Tôi vừa chọn phim gì ấy nhỉ?
+    - Bạn có thể nhắc lại phim tôi đã chọn không?
+    - Bộ phim tôi vừa xác nhận là gì?
+    - Nhắc lại phim tôi đã chọn lúc trước đi.
 
+# Intent người dùng nhập lại thông tin không nhỉ
 
 # lookup
 - lookup: genre
@@ -164,6 +276,17 @@
     - Giả tưởng
     - Trinh thám
 
+- lookup: year
+  examples: |
+    - 2020
+    - 2021
+    - 2022
+    - 2023
+    - 2024
+    - 2025
+    - năm nay
+    - năm ngoái
+    - năm 2019
 
 
 # synonym
