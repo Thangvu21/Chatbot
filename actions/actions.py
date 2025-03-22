@@ -2,6 +2,15 @@ from typing import Any, Text, Dict, List
 import requests
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import SlotSet
+import os
+from dotenv import load_dotenv
+
+# Load biến môi trường từ .env
+load_dotenv()
+
+# Lấy giá trị từ .env
+FASTAPI_URL = os.getenv("FASTAPI_URL")
 
 class ActionAffirm(Action):
     
@@ -68,8 +77,7 @@ class ActionSuggestMovieGenre(Action):
 
         # Gửi request đến FastAPI
         user_message = tracker.latest_message.get("text") 
-        fastapi_url = "https://c5e0-34-138-21-178.ngrok-free.app/recommend_movie/"
-        response = requests.post(fastapi_url, json={"question": user_message})
+        response = requests.post(FASTAPI_URL, json={"question": user_message})
 
         if response.status_code == 200:
             data = response.json()
@@ -140,8 +148,48 @@ class ActionAskMovieActor(Action):
         else:
             # Gọi thử LLM hoặc database để lấy thông tin phim
             # goi BE neu co thi tra ve
-            actor = ""
+            actor = "abc"
 
             dispatcher.utter_message(text="Diễn viên của bộ phim {} là {}".format(movie_name, actor))
 
         return []
+
+# action rep confirm
+class ActionUserConfirmMoive(Action):
+
+    def name(self) -> Text:
+        return "action_user_confirm_movie"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain):
+        
+        movie_name = tracker.get_slot("movie")
+
+        if not movie_name:
+            dispatcher.utter_message(text="Chúng tôi chưa xác định được tên phim bạn muốn xem, vui lòng nhập tên phim.")
+            return [SlotSet("movie", None)]  # Đảm bảo slot vẫn rỗng để bot hỏi lại
+        
+        # Set slot nếu có giá trị movie
+        dispatcher.utter_message(text=f"Bạn muốn xem phim {movie_name} nhỉ bạn muốn biết thêm thông tin nào ta?")
+        return [SlotSet("movie", movie_name)]
+
+# ACtionAskConfirmedmoive
+class ActionAskConfirmedMovie(Action):
+
+    def name(self) -> Text:
+        return "action_ask_confirmed_movie"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain):
+        
+        movie_name = tracker.get_slot("movie")
+
+        if not movie_name:
+            dispatcher.utter_message(text="Chúng tôi chưa xác định được tên phim bạn muốn xem, vui lòng nhập tên phim.")
+            return [SlotSet("movie", None)]  # Đảm bảo slot vẫn rỗng để bot hỏi lại
+        
+        # Set slot nếu có giá trị movie
+        dispatcher.utter_message(text=f"Phim bạn vừa chọn là {movie_name} bạn muốn biết thêm thông tin nào ta?")
+        return [SlotSet("movie", movie_name)]

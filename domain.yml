@@ -53,6 +53,8 @@ intents:
   - suggest_multiple_description
   # confirm
   - ask_confirmed_movie
+  - ask_confirmed_moive_actor
+  - user_confirm_movie
   
 actions:
   - action_hello_world
@@ -60,6 +62,9 @@ actions:
   - action_affirm
   - action_suggest_movie
   - action_suggest_movie_genre
+  - action_ask_confirmed_movie
+  - action_user_confirm_movie
+  - action_ask_movie_actor
 # responses:
   
   

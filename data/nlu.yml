@@ -249,8 +249,23 @@ nlu:
     - Bạn có thể nhắc lại phim tôi đã chọn không?
     - Bộ phim tôi vừa xác nhận là gì?
     - Nhắc lại phim tôi đã chọn lúc trước đi.
+- intent: ask_confirmed_moive_actor
+  examples: |
+   - Diễn viên trong phim tôi đã chọn là ai?
+   - Bạn có thể nhắc lại diễn viên trong phim tôi đã chọn không?
+  
 
 # Intent người dùng nhập lại thông tin không nhỉ
+- intent: user_confirm_movie
+  examples: |
+    - Tôi nghĩ tôi chọn bộ phim [My Neighbors the Yamadas](movie) 
+    - Mình chọn phim [The Dark Knight](movie)
+    - Tôi chọn [The Godfather](movie)
+    - Thử [The Matrix](movie) xem sao
+    - [The Lion King](movie) 
+    - [The Prestige](movie) đi
+    - [The Shawshank Redemption](movie) là lựa chọn của tôi
+    - Tôi thích [The Dark Knight Rises](movie) nhất
 
 # lookup
 - lookup: genre

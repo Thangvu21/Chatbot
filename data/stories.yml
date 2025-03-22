@@ -15,6 +15,12 @@ stories:
   - action: action_suggest_movie
   - intent: suggest_movie_genre
   - action: action_suggest_movie_genre
+  - intent: user_confirm_movie
+  - action: action_user_confirm_movie
+  - intent: ask_confirmed_movie
+  - action: action_ask_confirmed_movie
+  - intent: ask_confirmed_moive_actor
+  - action: action_ask_movie_actor
 
 - story: ask movie genre
   steps:
