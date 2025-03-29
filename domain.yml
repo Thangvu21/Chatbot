@@ -52,8 +52,15 @@ intents:
   - suggest_movie_year
   - suggest_multiple_description
   # confirm
+  # ask
   - ask_confirmed_movie
-  - ask_confirmed_moive_actor
+  - ask_confirmed_movie_actor
+  - ask_confirmed_movie_director
+  - ask_confirmed_movie_genre
+  - ask_confirmed_movie_language
+  - ask_confirmed_movie_length
+  - ask_confirmed_movie_plot
+  # answer
   - user_confirm_movie
   
 actions:
@@ -62,55 +69,56 @@ actions:
   - action_affirm
   - action_suggest_movie
   - action_suggest_movie_genre
+  - action_suggest_movie_director
   - action_ask_confirmed_movie
+  # Trả lời câu hỏi người dùng đã xác nhận phim
   - action_user_confirm_movie
+  # Trả lời câu hỏi thông tin phim từ tên phim
   - action_ask_movie_actor
-# responses:
-  
+  - action_ask_movie_length
+  - action_ask_movie_language
+  - action_ask_movie_plot
+  - action_ask_movie_director
+  - action_ask_movie_genre
+
+responses:
+  utter_goodbye:
+    - text: "Tạm biệt nhé! Chúc bạn một ngày tốt lành. 🌟"
+    - text: "Hẹn gặp lại! Nếu cần giúp đỡ cứ quay lại nhé. 👋"
+  utter_fallback:
+    - text: "Xin lỗi, tôi không hiểu ý bạn. Bạn có thể nói rõ hơn không?"
   
 slots:
   movie:
     type: text
-    influence_conversation: true
+    influence_conversation: false
     mappings:
       - type: from_entity
         entity: movie
-  genre:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: genre
-  director:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: director
-  actor:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: actor
-  language:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: language
-  length:
-    type: float
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: length
-  plot:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: plot
+  # genre:
+  #   type: text
+  #   influence_conversation: false
+  #   mappings:
+  #     - type: from_entity
+  #       entity: genre
+  # director:
+  #   type: text
+  #   influence_conversation: false
+  #   mappings:
+  #     - type: from_entity
+  #       entity: director
+  # actor:
+  #   type: text
+  #   influence_conversation: false
+  #   mappings:
+  #     - type: from_entity
+  #       entity: actor
+  # plot:
+  #   type: text
+  #   influence_conversation: false
+  #   mappings:
+  #     - type: from_entity
+  #       entity: plot
 
 session_config:
   session_expiration_time: 60

@@ -54,6 +54,8 @@ nlu:
     - Thanks!  
     - Cảm ơn bot nha!  
     - Bạn hữu ích quá, cảm ơn nhiều!  
+    - cam on
+    - camr on
 
 # ask movie information: hỏi thẳng thông tin phim: từ tên phim -> lấy ra thông tin tương ứng từ tên phim
 - intent: ask_movie_genre
@@ -93,7 +95,6 @@ nlu:
     - Phim [Dune](movie) dài bao nhiêu phút?
     - Thời lượng của [The Godfather](movie) là bao lâu?
     - Xem [The Irishman](movie) mất bao lâu?
-    - Phim [Tenet](movie) có dài hơn 2 tiếng không?
     - Tôi muốn biết thời lượng của phim [Interstellar](movie)
 
 - intent: ask_movie_plot
@@ -138,8 +139,6 @@ nlu:
     - Mình muốn biết phim *[movie]{"entity": "movie"}* thuộc thể loại [genre]{"entity": "genre"}, có [actor]{"entity": "actor"} đóng và được đạo diễn bởi [director]{"entity": "director"} đúng không?  
     - Phim *[movie]{"entity": "movie"}* có thời lượng bao nhiêu phút, được nói bằng ngôn ngữ gì và có nội dung thế nào?  
 
-
-
 # suggest movie
 # Tìm theo mô tả : suggest multiple entities and pilot: đưa ra 1 list đầy đủ
 - intent: suggest_multiple_description
@@ -169,11 +168,13 @@ nlu:
     - Bạn có thể gợi ý phim nào hay không?
     - Có bộ phim nào đáng xem không?
     - Tôi muốn xem một bộ phim hay.
+    - Tôi muốn xem phim  
     - Hôm nay có phim gì hay không?
     - Top 10 phim hot nhất hiện nay?
     - Bạn có thể giới thiệu phim nào đang hot không?
     - Có phim nào được đánh giá cao gần đây không?
 
+# Hoặc là dùng LLM luôn
 # Intent gợi ý theo thể loại: đưa ra câu trả lời lấy list phim theo thể loại
 - intent: suggest_movie_genre
   examples: |
@@ -196,7 +197,8 @@ nlu:
     - Bạn có phim [Cổ trang](genre) nào hay không?  
     - Mình muốn xem một bộ phim [Kịch tính](genre), có bộ nào hấp dẫn không?  
     - Có bộ phim [Giả tưởng](genre) nào đáng xem không?  
-    - Bạn có thể gợi ý một bộ phim [Trinh thám](genre) gay cấn không?   
+    - Bạn có thể gợi ý một bộ phim [Trinh thám](genre) gay cấn không?  
+    - Tôi muốn xem [Hành động](genre)
 
 # Intent gợi ý theo diễn viên: : đưa ra câu trả lời lấy list phim theo tên diễn viên
 - intent: suggest_movie_actor
@@ -213,12 +215,6 @@ nlu:
     - Bạn có thể giới thiệu một bộ phim của [Denis Villeneuve](director) không?
 
 # Intent gợi ý theo cảm xúc : đưa ra câu trả lời theo
-# "Cảm động" → Tình cảm, Tâm lý, Gia đình
-# "Buồn" → Tình cảm, Drama, Âm nhạc
-# "Vui nhộn" → Hài, Hoạt hình, Phiêu lưu
-# "Truyền cảm hứng" → Thể thao, Âm nhạc, Khoa học viễn tưởng
-# "Nhẹ nhàng, dễ thương" → Gia đình, Hoạt hình, Lãng mạn
-# "Hợp khi trời mưa" → Kinh dị, Trinh thám, Tâm lý
 # Hoặc là dùng LLM để đưa ra gợi ý phim bên ngoài nhưng không đặt được vé
 - intent: suggest_movie_mood
   examples: |
@@ -249,11 +245,57 @@ nlu:
     - Bạn có thể nhắc lại phim tôi đã chọn không?
     - Bộ phim tôi vừa xác nhận là gì?
     - Nhắc lại phim tôi đã chọn lúc trước đi.
-- intent: ask_confirmed_moive_actor
+- intent: ask_confirmed_movie_actor
   examples: |
    - Diễn viên trong phim tôi đã chọn là ai?
    - Bạn có thể nhắc lại diễn viên trong phim tôi đã chọn không?
-  
+   - Ai là diễn viên trong phim tôi đã chọn?
+   - Ai là người đóng phim tôi đã chọn?
+   - Diễn viên phim trên là ai?
+   - Ai là người đóng phim trên?
+- intent: ask_confirmed_movie_director
+  examples: |
+   - Đạo diễn của phim tôi đã chọn là ai?
+   - Bạn có thể nhắc lại đạo diễn của phim tôi đã chọn không?
+   - Ai là đạo diễn của phim tôi đã chọn?
+   - Ai làm phim tôi đã chọn?
+   - Đạo diễn phim trên là ai?
+   - Ai là người làm phim trên?
+- intent: ask_confirmed_movie_genre
+  examples: |
+   - Thể loại của phim tôi đã chọn là gì?
+   - Bạn có thể nhắc lại thể loại của phim tôi đã chọn không?
+   - Phim đã chọn thuộc thể loại gì
+   - Thể loại phim tôi đã chọn là gì?
+   - Thể loại phim trên là gì?
+- intent: ask_confirmed_movie_language
+  examples: |
+   - Ngôn ngữ của phim tôi đã chọn là gì?
+   - Bạn có thể nhắc lại ngôn ngữ của phim tôi đã chọn không?
+   - Phim trên có ngôn ngữ gì?
+   - Phim trên nói tiếng gì?  
+- intent: ask_confirmed_movie_length
+  examples: |
+   - Thời lượng của phim tôi đã chọn là bao lâu?
+   - Bạn có thể nhắc lại thời lượng của phim tôi đã chọn không?
+   - Phim tôi đã chọn dài bao nhiêu phút?
+   - Phim trên có thời lượng bao lâu?
+   - Phim trên dài bao nhiêu phút?
+- intent: ask_confirmed_movie_plot
+  examples: |
+   - Nội dung của phim tôi đã chọn là gì?
+   - Bạn có thể nhắc lại nội dung của phim tôi đã chọn không?
+   - Nội dung phim tôi đã chọn là gì?
+   - Nội dung phim trên là gì?
+   - phim tôi đã chọn có nội dung như nào?
+   - cốt truyện phim tôi đã chọn là gì?
+   - tình tiết phim tôi đã chọn là gì?
+   - diễn biến phim tôi đã chọn là gì?
+   - sự kiện trong phim tôi đã chọn là gì
+   - tình tiết của phim trên là gì?
+   - sự kiện trong phim trên là gì?
+   - diễn biến phim trên là gì?
+
 
 # Intent người dùng nhập lại thông tin không nhỉ
 - intent: user_confirm_movie
@@ -314,6 +356,7 @@ nlu:
     - điện ảnh
     - phim ảnh
     - phim chiếu rạp
+    - phim trên
 
 - synonym: genre
   examples: |
@@ -325,6 +368,8 @@ nlu:
     - dòng phim
     - phong cách phim
     - loại phim
+    - thể loại của phim
+    - thể loại điện ảnh
 
 - synonym: director
   examples: |
@@ -344,6 +389,9 @@ nlu:
     - tài tử
     - tài năng
     - người nổi tiếng
+    - người đóng phim
+    - người diễn xuất
+    - diễn viên phim
 
 - synonym: language
   examples: |

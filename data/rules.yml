@@ -1,3 +1,20 @@
 version: "3.1"
 
+rules:
+- rule: Người dùng nói cảm ơn
+  steps:
+    - intent: thanks
+    - action: action_thanks
 
+- rule: Người dùng chào tạm biệt
+  steps:
+    - intent: goodbye
+    - action: utter_goodbye
+- rule: Xử lý khi chatbot không hiểu
+  steps:
+    - intent: nlu_fallback
+    - action: utter_fallback
+- rule: Chào hỏi
+  steps:
+    - intent: greet
+    - action: action_hello_world
