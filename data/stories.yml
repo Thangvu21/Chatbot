@@ -2,24 +2,23 @@ version: "3.1"
 
 stories:
 
-# story suggest 
+# story suggest dùng LLM để gợi ý hết cũng được
+# chia ra lấy API
 - story: suggest gerne movie 
   steps:
   - intent: suggest_movie
   - action: action_suggest_movie
   - intent: suggest_movie_genre
   - action: action_suggest_movie_genre
-  - checkpoint: movie_suggested
 
 # story confirm
 - story: suggested movie
   steps:
-  - checkpoint: movie_suggested
   - intent: user_confirm_movie
   - action: action_user_confirm_movie
   - checkpoint: movie_confirmed
 
-# story ask again
+# story ask again seleted_movie
 - story: ask movie confirmed 
   steps:
   - checkpoint: movie_confirmed
@@ -29,45 +28,49 @@ stories:
 - story: ask actor confirmed movie
   steps:
   - checkpoint: movie_confirmed
-  - intent: ask_confirmed_moive_actor
-  - action: action_ask_movie_actor
+  - intent: ask_confirmed_movie_actor
+  - action: action_ask_selected_movie_actor
   
 - story: ask director confirmed movie
   steps:
   - checkpoint: movie_confirmed
   - intent: ask_confirmed_movie_director
-  - action: action_ask_movie_director
+  - action: action_ask_selected_movie_director
 
 - story: ask language confirmed movie
   steps:
   - checkpoint: movie_confirmed
   - intent: ask_confirmed_movie_language
-  - action: action_ask_movie_language
+  - action: action_ask_selected_movie_language
 
 - story: ask length confirmed movie
   steps:
   - checkpoint: movie_confirmed
   - intent: ask_confirmed_movie_length
-  - action: action_ask_movie_length
+  - action: action_ask_selected_movie_length
 
 - story: ask plot confirmed movie
   steps:
   - checkpoint: movie_confirmed
   - intent: ask_confirmed_movie_plot
-  - action: action_ask_movie_plot
+  - action: action_ask_selected_movie_plot
 
 - story: ask genre confirmed movie
   steps:
   - checkpoint: movie_confirmed
   - intent: ask_confirmed_movie_genre
-  - action: action_ask_movie_genre
+  - action: action_ask_selected_movie_genre
   
+- story: ask schedule confirmed movie
+  steps:
+  - checkpoint: movie_confirmed
+  - intent: ask_confirmed_movie_schedule
+  - action: action_ask_selected_movie_schedule
 # story ask movie information
 - story: ask genre from name
   steps:
   - intent: ask_movie_genre
   - action: action_ask_movie_genre
-  
 - story: ask director from name
   steps:
   - intent: ask_movie_director
@@ -88,7 +91,25 @@ stories:
   steps:
   - intent: ask_movie_plot
   - action: action_ask_movie_plot
+# Người dùng hỏi về lịch chiếu
+- story: ask movie schedule
+  steps:
+  - intent: ask_movie_schedule
+  - action: action_ask_movie_schedule
 
+# Người dùng từ gợi ý từ nhiều thông tin
+- story: ask movie multiple information
+  steps:
+  - intent: ask_movie_multiple_info
+  - action: action_ask_movie_multiple_info
+# Người dùng muốn tìm bộ phim từ nhiều thông tin
+- story: suggest multiple description
+  steps:
+  - intent: suggest_multiple_description
+  - action: action_suggest_movie_multiple_info
+
+
+# NGười dùng hỏi về cảm xúc
 
 
 

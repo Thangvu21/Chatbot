@@ -17,7 +17,7 @@ pipeline:
   max_ngram: 2  # Giảm từ 4 xuống 2 để tránh overfitting
 
 - name: DIETClassifier
-  epochs: 200  # Tăng epochs để train lâu hơn
+  epochs: 150  # Tăng epochs để train lâu hơn
   constrain_similarities: true
 
 - name: EntitySynonymMapper
@@ -32,17 +32,17 @@ pipeline:
 
 policies:
 - name: MemoizationPolicy
-  max_history: 10  # Tăng để mô hình nhớ tốt hơn
+  max_history: 8  # Tăng để mô hình nhớ tốt hơn
 
 - name: RulePolicy
 
 - name: UnexpecTEDIntentPolicy
-  max_history: 10  # Tăng để hiểu được nhiều ngữ cảnh hơn
-  epochs: 250  # Tăng epochs để train lâu hơn
+  max_history: 8  # Tăng để hiểu được nhiều ngữ cảnh hơn
+  epochs: 150  # Tăng epochs để train lâu hơn
 
 - name: TEDPolicy
-  max_history: 10  # Nhớ dài hơn
-  epochs: 250  # Tăng epochs để giảm `loss`
+  max_history: 8  # Nhớ dài hơn
+  epochs: 150  # Tăng epochs để giảm `loss`
   constrain_similarities: true
 
 assistant_id: 20250318-234357-dry-score

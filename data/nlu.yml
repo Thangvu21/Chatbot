@@ -105,14 +105,14 @@ nlu:
     - Phim [Interstellar](movie) kể về điều gì?
     - Nội dung chính của phim [Joker](movie) là gì?
 
-# Hỏi phim mới ra rạp: Lấy ra danh sách gần đây nhất
+# Hỏi phim mới ra rạp BE: Lấy ra danh sách gần đây nhất
 - intent: ask_now_showing_movies
   examples: |
     - Hiện tại có phim nào mới chiếu rạp không?  
     - Bạn có thể cho mình danh sách các phim đang chiếu không?  
     - Có phim [genre]{"entity": "genre"} nào mới ra rạp không?  
     - Ở [cinema]{"entity": "cinema"} có phim nào đang chiếu vậy?  
-# Hỏi về lịch chiếu phim cụ thể: : Lấy ra lịch chiếu, địa điểm cụ thể của phim từ tên phim
+# Hỏi về lịch chiếu phim cụ thể: BE: Lấy ra lịch chiếu, địa điểm cụ thể của phim từ tên phim
 - intent: ask_movie_schedule
   examples: |
     - Phim [movie]{"entity": "movie"} có suất chiếu nào vào [date]{"entity": "date"} không?  
@@ -121,9 +121,10 @@ nlu:
     - Bạn có thể cho mình biết lịch chiếu của *[movie]{"entity": "movie"}* vào [date]{"entity": "date"} không?  
     - Ở [location]{"entity": "location"} có rạp nào chiếu phim [movie]{"entity": "movie"} không?  
     - Phim *[movie]{"entity": "movie"}* có chiếu vào [date]{"entity": "date"} không?
+
 # ask multiple information
-# Hỏi phim theo nhiều tiêu chí: từ nhiều thông tin -> phim: trả về toàn bộ thông tin của phim luôn
-- intent: ask_movie_multiple_info
+# Hỏi phim theo nhiều tiêu chí: RAG từ nhiều thông tin -> phim: trả về toàn bộ thông tin của phim luôn
+- intent: ask_movie_multiple_info 
   examples: |
     - Có bộ phim [genre]{"entity": "genre"} nào của đạo diễn [director]{"entity": "director"} không?  
     - Mình muốn tìm một phim [genre]{"entity": "genre"} có [actor]{"entity": "actor"} đóng và dài khoảng [length]{"entity": "length"} phút  
@@ -140,7 +141,7 @@ nlu:
     - Phim *[movie]{"entity": "movie"}* có thời lượng bao nhiêu phút, được nói bằng ngôn ngữ gì và có nội dung thế nào?  
 
 # suggest movie
-# Tìm theo mô tả : suggest multiple entities and pilot: đưa ra 1 list đầy đủ
+# Tìm theo mô tả : suggest multiple entities and pilot: RAG
 - intent: suggest_multiple_description
   examples: |
     - Có một bộ phim [genre]{"entity": "genre"} mà mình không nhớ tên, bạn giúp mình tìm được không?  
@@ -174,8 +175,8 @@ nlu:
     - Bạn có thể giới thiệu phim nào đang hot không?
     - Có phim nào được đánh giá cao gần đây không?
 
-# Hoặc là dùng LLM luôn
-# Intent gợi ý theo thể loại: đưa ra câu trả lời lấy list phim theo thể loại
+# ĐỊnh dùng BE tạm cứ để RAG đã
+# Intent gợi ý theo thể loại: BE đưa ra câu trả lời lấy list phim theo thể loại
 - intent: suggest_movie_genre
   examples: |
     - Mình muốn xem một bộ phim thể loại [Hành động](genre).
@@ -200,14 +201,14 @@ nlu:
     - Bạn có thể gợi ý một bộ phim [Trinh thám](genre) gay cấn không?  
     - Tôi muốn xem [Hành động](genre)
 
-# Intent gợi ý theo diễn viên: : đưa ra câu trả lời lấy list phim theo tên diễn viên
+# Intent gợi ý theo diễn viên BE : đưa ra câu trả lời lấy list phim theo tên diễn viên
 - intent: suggest_movie_actor
   examples: |
     - Có phim nào của [Leonardo DiCaprio](actor) không?
     - Tôi muốn xem phim mà [Emma Watson](actor) đóng.
     - Bạn có thể gợi ý phim có [Tom Hardy](actor) không?
 
-# Intent gợi ý theo đạo diễn  : đưa ra câu trả lời lấy list phim theo tên đạo diễn
+# Intent gợi ý theo đạo diễn BE : đưa ra câu trả lời lấy list phim theo tên đạo diễn
 - intent: suggest_movie_director
   examples: |
     - Có phim nào do [Christopher Nolan](director) đạo diễn không?
@@ -228,7 +229,7 @@ nlu:
     - Mình muốn xem phim hài, có phim nào vui nhộn không?  
     - Hôm nay trời mưa, có phim nào hợp để xem không?  
 
-# Intent gợi ý theo thời gian
+# Intent gợi ý BE theo thời gian
 - intent: suggest_movie_year
   examples: |
     - Có bộ phim nào mới ra mắt không?
@@ -236,66 +237,114 @@ nlu:
     - Những phim đáng xem của năm 2022 là gì?
     - Có phim nào nổi bật trong năm 2021 không?
     - Danh sách phim hot nhất 2023?
+
 # Intent hỏi lại, xác nhận lại thông tin bên trên
 - intent: ask_confirmed_movie
   examples: |
-    - Bộ phim tôi đã chọn là gì nhỉ?
-    - Phim tôi đã confirm lúc nãy là gì?
-    - Tôi vừa chọn phim gì ấy nhỉ?
-    - Bạn có thể nhắc lại phim tôi đã chọn không?
-    - Bộ phim tôi vừa xác nhận là gì?
-    - Nhắc lại phim tôi đã chọn lúc trước đi.
+    - [Bộ phim tôi đã chọn](movie_selected) là gì nhỉ?
+    - [Phim tôi đã xác nhận](movie_selected) lúc nãy là gì?
+    - Tôi vừa chọn [bộ phim nào](movie_selected) ấy nhỉ?
+    - Bạn có thể nhắc lại [phim tôi đã chọn](movie_selected) không?
+    - [Bộ phim tôi vừa xác nhận](movie_selected) là gì?
+    - Nhắc lại [phim tôi đã chọn](movie_selected) lúc trước đi.
+    - [Bộ phim này](movie_selected) có tên là gì?
+    - Bạn có thể cho tôi biết tên của [bộ phim đã xác nhận](movie_selected) không?
+    - Tôi đã chọn [bộ phim nào](movie_selected) vậy?
+    - [Phim đã chọn](movie_selected) có tên là gì?
+
 - intent: ask_confirmed_movie_actor
   examples: |
-   - Diễn viên trong phim tôi đã chọn là ai?
-   - Bạn có thể nhắc lại diễn viên trong phim tôi đã chọn không?
-   - Ai là diễn viên trong phim tôi đã chọn?
-   - Ai là người đóng phim tôi đã chọn?
-   - Diễn viên phim trên là ai?
-   - Ai là người đóng phim trên?
+    - Diễn viên trong [phim đã chọn](movie_selected) là ai?
+    - Bạn có thể nhắc lại diễn viên trong [bộ phim tôi đã chọn](movie_selected) không?
+    - Ai là diễn viên trong [bộ phim đã xác nhận](movie_selected)?
+    - Ai là người đóng [bộ phim tôi vừa chọn](movie_selected)?
+    - [Bộ phim đã chọn](movie_selected) có những diễn viên nào?
+    - Ai đã tham gia diễn xuất trong [bộ phim này](movie_selected)?
+    - Danh sách diễn viên của [bộ phim trước đó](movie_selected) gồm những ai?
+    - Bạn có thể cho tôi biết các diễn viên của [phim đã chọn](movie_selected) không?
+    - [Bộ phim tôi đã xác nhận](movie_selected) có diễn viên chính là ai?
+    - Diễn viên nào đóng trong [bộ phim trên](movie_selected)?
+
 - intent: ask_confirmed_movie_director
   examples: |
-   - Đạo diễn của phim tôi đã chọn là ai?
-   - Bạn có thể nhắc lại đạo diễn của phim tôi đã chọn không?
-   - Ai là đạo diễn của phim tôi đã chọn?
-   - Ai làm phim tôi đã chọn?
-   - Đạo diễn phim trên là ai?
-   - Ai là người làm phim trên?
+    - Đạo diễn của [phim đã chọn](movie_selected) là ai?
+    - Bạn có thể nhắc lại đạo diễn của [bộ phim tôi đã chọn](movie_selected) không?
+    - Ai là đạo diễn của [bộ phim đã xác nhận](movie_selected)?
+    - Ai là người làm [bộ phim tôi vừa chọn](movie_selected)?
+    - [Bộ phim đã chọn](movie_selected) có đạo diễn là ai?
+    - Ai đã làm [bộ phim này](movie_selected)?
+    - Đạo diễn của [bộ phim trước đó](movie_selected) là ai?
+    - Bạn có thể cho tôi biết đạo diễn của [phim đã chọn](movie_selected) không?
+    - Ai là người đứng sau [bộ phim tôi đã xác nhận](movie_selected)?
+    - [Bộ phim trên](movie_selected) được đạo diễn bởi ai?
+
 - intent: ask_confirmed_movie_genre
   examples: |
-   - Thể loại của phim tôi đã chọn là gì?
-   - Bạn có thể nhắc lại thể loại của phim tôi đã chọn không?
-   - Phim đã chọn thuộc thể loại gì
-   - Thể loại phim tôi đã chọn là gì?
-   - Thể loại phim trên là gì?
+    - Thể loại của [phim đã chọn](movie_selected) là gì?
+    - Bạn có thể nhắc lại thể loại của [bộ phim tôi đã chọn](movie_selected) không?
+    - [Bộ phim đã xác nhận](movie_selected) thuộc thể loại gì?
+    - [Phim trên](movie_selected) thuộc thể loại nào?
+    - [Bộ phim tôi vừa chọn](movie_selected) là thể loại gì?
+    - [Bộ phim này](movie_selected) thuộc thể loại gì?
+    - [Bộ phim trước đó](movie_selected) thuộc thể loại nào?
+    - Bạn có thể cho tôi biết [phim đã chọn](movie_selected) thuộc thể loại gì không?
+    - [Phim tôi đã xác nhận](movie_selected) là phim thuộc thể loại nào?
+    - [Bộ phim đã chọn](movie_selected) thuộc thể loại hành động, kinh dị hay gì khác?
+
 - intent: ask_confirmed_movie_language
   examples: |
-   - Ngôn ngữ của phim tôi đã chọn là gì?
-   - Bạn có thể nhắc lại ngôn ngữ của phim tôi đã chọn không?
-   - Phim trên có ngôn ngữ gì?
-   - Phim trên nói tiếng gì?  
+    - Ngôn ngữ của [phim đã chọn](movie_selected) là gì?
+    - Bạn có thể nhắc lại ngôn ngữ của [bộ phim tôi đã chọn](movie_selected) không?
+    - [Bộ phim đã xác nhận](movie_selected) có ngôn ngữ gì?
+    - [Phim trên](movie_selected) nói tiếng gì?
+    - [Bộ phim tôi vừa chọn](movie_selected) được nói bằng ngôn ngữ nào?
+    - [Bộ phim này](movie_selected) sử dụng ngôn ngữ nào?
+    - [Bộ phim trước đó](movie_selected) được chiếu với ngôn ngữ gì?
+    - Bạn có thể nói cho tôi biết [phim đã chọn](movie_selected) có ngôn ngữ gì không?
+    - [Phim tôi đã xác nhận](movie_selected) có bản gốc bằng tiếng gì?
+    - [Bộ phim đã chọn](movie_selected) có phụ đề ngôn ngữ nào?
+
 - intent: ask_confirmed_movie_length
   examples: |
-   - Thời lượng của phim tôi đã chọn là bao lâu?
-   - Bạn có thể nhắc lại thời lượng của phim tôi đã chọn không?
-   - Phim tôi đã chọn dài bao nhiêu phút?
-   - Phim trên có thời lượng bao lâu?
-   - Phim trên dài bao nhiêu phút?
+    - Thời lượng của [phim đã chọn](movie_selected) là bao lâu?
+    - Bạn có thể nhắc lại thời lượng của [bộ phim tôi đã chọn](movie_selected) không?
+    - [Bộ phim đã xác nhận](movie_selected) dài bao nhiêu phút?
+    - [Phim trên](movie_selected) có thời lượng bao lâu?
+    - [Bộ phim đã chọn](movie_selected) có thời lượng là bao nhiêu?
+    - [Phim tôi mới xác nhận](movie_selected) dài bao lâu?
+    - [Bộ phim tôi đã xác nhận](movie_selected) kéo dài trong bao lâu?
+    - [Bộ phim trước đó](movie_selected) có độ dài bao nhiêu?
+    - Bạn có thể nói cho tôi biết [phim đã chọn](movie_selected) dài bao nhiêu phút không?
+    - [Bộ phim này](movie_selected) có thời gian chiếu là bao nhiêu?
+
 - intent: ask_confirmed_movie_plot
   examples: |
-   - Nội dung của phim tôi đã chọn là gì?
-   - Bạn có thể nhắc lại nội dung của phim tôi đã chọn không?
-   - Nội dung phim tôi đã chọn là gì?
-   - Nội dung phim trên là gì?
-   - phim tôi đã chọn có nội dung như nào?
-   - cốt truyện phim tôi đã chọn là gì?
-   - tình tiết phim tôi đã chọn là gì?
-   - diễn biến phim tôi đã chọn là gì?
-   - sự kiện trong phim tôi đã chọn là gì
-   - tình tiết của phim trên là gì?
-   - sự kiện trong phim trên là gì?
-   - diễn biến phim trên là gì?
+    - Nội dung của [phim đã chọn](movie_selected) là gì?
+    - Bạn có thể nhắc lại nội dung của [bộ phim tôi đã chọn](movie_selected) không?
+    - Nội dung của [bộ phim đã xác nhận](movie_selected) là gì?
+    - [Phim trên](movie_selected) có nội dung như nào?
+    - Cốt truyện của [bộ phim tôi đã chọn](movie_selected) là gì?
+    - Tình tiết trong [phim đã xác nhận](movie_selected) như thế nào?
+    - Diễn biến của [bộ phim trên](movie_selected) là gì?
+    - [Bộ phim đã chọn](movie_selected) kể về câu chuyện gì?
+    - [Tác phẩm đã chọn](movie_selected) có nội dung như thế nào?
+    - [Bộ phim trước đó](movie_selected) có nội dung gì?
+    - [Phim tôi mới xác nhận](movie_selected) nói về điều gì?
+    - Bạn có thể tóm tắt nội dung của [bộ phim đã chọn](movie_selected) không?
 
+# Hỏi về lịch chiếu phim đã xác nhận chẳng hạn
+- intent: ask_confirmed_movie_schedule
+  examples: |
+    - Lịch chiếu của [phim đã chọn](movie_selected) là gì?
+    - Bạn có thể cho tôi biết lịch chiếu của [bộ phim tôi đã chọn](movie_selected) không?
+    - [Bộ phim đã xác nhận](movie_selected) có lịch chiếu nào không?
+    - [Phim trên](movie_selected) có lịch chiếu ở đâu?
+    - [Bộ phim tôi vừa chọn](movie_selected) có lịch chiếu tại rạp nào?
+    - [Bộ phim này](movie_selected) có lịch chiếu vào ngày nào?
+    - [Bộ phim trước đó](movie_selected) có lịch chiếu ở đâu không?
+    - Bạn có thể cho tôi biết lịch chiếu của [phim đã chọn](movie_selected) không?
+    - [Phim tôi đã xác nhận](movie_selected) có suất chiếu nào không?
+    - [Bộ phim đã chọn](movie_selected) có lịch chiếu vào ngày nào?
 
 # Intent người dùng nhập lại thông tin không nhỉ
 - intent: user_confirm_movie
@@ -308,6 +357,10 @@ nlu:
     - [The Prestige](movie) đi
     - [The Shawshank Redemption](movie) là lựa chọn của tôi
     - Tôi thích [The Dark Knight Rises](movie) nhất
+    - Tôi chọn bộ phim [Inception](movie)
+    - Tôi muốn xem [The Social Network](movie)
+    - Tôi đã chọn [The Departed](movie)
+    - Mình chọn [The Silence of the Lambs](movie)
 
 # lookup
 - lookup: genre
@@ -348,6 +401,24 @@ nlu:
 
 # synonym
 # Movie entity
+- synonym: movie_seleted
+  examples: |
+    - phim đã chọn
+    - phim tôi đã chọn
+    - phim tôi đã xác nhận
+    - phim đã xác nhận
+    - phim trên
+    - bộ phim đã chọn
+    - bộ phim tôi đã chọn
+    - bộ phim tôi đã xác nhận
+    - bộ phim đã xác nhận
+    - bộ phim đã chọn lúc trước
+    - bộ phim trên
+    - tác phẩm đã chọn
+    - phim trước đó
+    - bộ phim trước đó
+    - phim tôi mới xác nhận
+
 - synonym: movie
   examples: |
     - phim
@@ -356,7 +427,6 @@ nlu:
     - điện ảnh
     - phim ảnh
     - phim chiếu rạp
-    - phim trên
 
 - synonym: genre
   examples: |

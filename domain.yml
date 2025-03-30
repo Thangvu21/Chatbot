@@ -2,6 +2,7 @@ version: "3.1"
 
 entities:
 # movie entitty
+  - movie_selected
   - movie
   - genre
   - director
@@ -38,9 +39,10 @@ intents:
   - ask_movie_language
   - ask_movie_length
   - ask_movie_plot
+  - ask_movie_schedule
   # ask 
   - ask_now_showing_movies
-  - ask_movie_schedule
+  - suggest_multiple_description
   - ask_movie_multiple_info
   # user give information
   # suggest movie
@@ -50,7 +52,6 @@ intents:
   - suggest_movie_actor
   - suggest_movie_mood
   - suggest_movie_year
-  - suggest_multiple_description
   # confirm
   # ask
   - ask_confirmed_movie
@@ -60,6 +61,7 @@ intents:
   - ask_confirmed_movie_language
   - ask_confirmed_movie_length
   - ask_confirmed_movie_plot
+  - ask_confirmed_movie_schedule
   # answer
   - user_confirm_movie
   
@@ -67,19 +69,33 @@ actions:
   - action_hello_world
   - action_thanks
   - action_affirm
+  # action_suggest_movie
   - action_suggest_movie
   - action_suggest_movie_genre
   - action_suggest_movie_director
-  - action_ask_confirmed_movie
+  # muitiple
+  - action_ask_movie_multiple_info
+  - action_suggest_movie_multiple_info
   # Trả lời câu hỏi người dùng đã xác nhận phim
   - action_user_confirm_movie
   # Trả lời câu hỏi thông tin phim từ tên phim
+  - action_ask_movie_genre
+  - action_ask_movie_director
   - action_ask_movie_actor
   - action_ask_movie_length
   - action_ask_movie_language
   - action_ask_movie_plot
-  - action_ask_movie_director
-  - action_ask_movie_genre
+  - action_ask_movie_schedule
+  # trả lời từ lựa chọn người dùng
+  - action_ask_confirmed_movie
+  - action_ask_selected_movie_genre
+  - action_ask_selected_movie_director
+  - action_ask_selected_movie_actor
+  - action_ask_selected_movie_length
+  - action_ask_selected_movie_language
+  - action_ask_selected_movie_plot
+  - action_ask_selected_movie_schedule
+  # Trả lời câu hỏi lịch chiếu phim
 
 responses:
   utter_goodbye:
@@ -95,6 +111,10 @@ slots:
     mappings:
       - type: from_entity
         entity: movie
+  movie_selected:
+    type: text
+    influence_conversation: false
+    mappings: []
   # genre:
   #   type: text
   #   influence_conversation: false
